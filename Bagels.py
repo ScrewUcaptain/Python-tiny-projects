@@ -8,8 +8,9 @@ def main():
     print(f'''
 		I am thinking of a {NUM_DIGITS}-digit number with no repeated digits.
 		Try to guess what it is. Here are some clues:
-		When I say:    That means:
-    		Pico         One digit is correct but in the wrong position.
+		When I say:         That means:
+  
+    		        Pico         One digit is correct but in the wrong position.
 			Fermi        One digit is correct and in the right position.
 			Bagels       No digit is correct.
 
@@ -17,24 +18,24 @@ def main():
 		clues would be Fermi Pico.''')
 
     while True:
-        secretBagel = secretBagel()
+        secretNum = secretBagel()
         print('I have thought up a number.')
         print(f'You have {MAX_GUESSES} to get it.')
         numGuesses = 1
-        while numGuesses <= MAX_GUESSES or not guess.isdecimal():
+        while numGuesses <= MAX_GUESSES:
             guess = ''
-            while len(guess) != len(NUM_DIGITS):
+            while len(guess) != NUM_DIGITS or not guess.isdecimal():
                 print(f'#{numGuesses} guess :')
                 guess = input('>>')
-            clues = getClues(guess, secretBagel)
+            clues = getClues(guess, secretNum)
             print(clues)
             numGuesses += 1
 
-            if guess == secretBagel:
+            if guess == secretNum:
                 break
             if numGuesses > MAX_GUESSES:
                 print(
-                    f'You have exhausted all your attempts, sorry :(, the answer was {secretBagel}')
+                    f'You have exhausted all your attempts, sorry :(, the answer was {secretNum}')
 
         print("Do you want to play again ? (yes/no)")
         res = input('>>')
@@ -67,8 +68,8 @@ def getClues(guess, bagels):
         return 'Bagels'
     else:
         clues.sort()
-        return ''.join(clues)
+        return ' '.join(clues)
 
 
-if __name__ == '__main__':
-    main()
+main()
+# if __name__ == '__main__':
