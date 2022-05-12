@@ -1,16 +1,38 @@
 import random
 
+# boucle principale
+
 
 def main():
-    print(''' The Birthday Paradox,
-          How many birthday should I generate ? ''')
-    num = input('>>')
-    birthdays = generateBirthday(num)
-    print('Here are {} birthdays' .format(num))
-    print(birthdays)
+    print("The Birthday Paradox...")
+    while True:
+        print('''
+          How many birthday should I generate ? ('quit' for exit) ''')
+        num = input('>>')
+        if num == 'quit':
+            print("Goodbye")
+            break
+        elif not num.isdecimal():
+            continue
+
+        birthdays = generateBirthday(num)
+        print('Here are {} birthdays' .format(num))  # remplace fstring
+        print(birthdays)
+
+        match = getMatch(birthdays)
+        if match != None:
+            print(match, " est une date d'anniversaire présente plusieurs fois")
+        else:
+            print("Tous les anniversaires sont uniques !")
 
 
-def getMatch()
+def getMatch(birthdays):
+    if len(birthdays) == len(set(birthdays)):
+        return None
+    for i, date in enumerate(birthdays):
+        for j, date2 in enumerate(birthdays[i+1:]):
+            if date == date2:
+                return date
 
 
 def generateBirthday(num):
